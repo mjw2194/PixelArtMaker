@@ -6,7 +6,7 @@ function captureDimensions(event){
   var height = document.getElementById('inputHeight');
   var width = document.getElementById('inputWidth');
   var dimensions = [height,width];
-  return dimensions;
+  console.log(dimensions);
 }
 function makeGrid() {
 
