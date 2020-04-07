@@ -27,5 +27,12 @@ document.addEventListener('DOMContentLoaded', function(){
 function makeGrid() {
 
 // Your code goes here!
+  for (var row = 1; row <=4; row++){
+    var canvass = document.getElementById('pixelCanvas');
+    canvass.insertRow()
+    for (var col = 1; col <=4; col++){
+      canvass.rows[row - 1].insertCell();
+    }
+  }
 
 }
