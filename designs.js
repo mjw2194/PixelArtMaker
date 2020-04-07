@@ -10,12 +10,18 @@ captureDimensions = function (event){
   console.log(dimensions);
 }
 
+captureColor = function(event){
+  var color = document.getElementById('colorPicker');
+  console.log(color.value);
+}
+
 hearThat = function() {
   console.log("CLICK CLACK!!!");
 }
 
 document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('click', captureDimensions);
+  document.addEventListener('click', captureColor);
 });
 
 function makeGrid() {
