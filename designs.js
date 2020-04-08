@@ -3,8 +3,8 @@
 
 // When size is submitted by the user, call makeGrid()
 
-hearThat = function() {
-  console.log("CLICK CLACK!!!");
+hearThat = function(event) {
+  console.log(event.target + "CLICK CLACK!!!");
 }
 
 
@@ -21,17 +21,37 @@ captureColor = function(event){
   console.log(color.value);
 }
 
+setColor = function(event){
+  var color = document.getElementById('colorPicker').value;
 
-function makeGrid() {
+  if (event.target.className === 'filled'){
+    event.target.className = 'empty';
+    event.target.style.backgroundColor = "#ffffff";
+  }
+  else {
+    event.target.className = 'filled';
+    event.target.style.backgroundColor = color;
+  }
+}
+
+
+function makeGrid(event) {
 
   //var height = captureDimensions()[0];
   //var width = captureDimensions()[1];
+  event.preventDefault();
   var height = document.getElementById('inputHeight').value;
   var width = document.getElementById('inputWidth').value;
   var canvass = document.getElementById('pixelCanvas');
+  var new_row = document.createElement('tr');
 
   for (var row = 1; row <=width; row++){
-    canvass.insertRow();
+    if(row == 1){
+      canvass.appendChild(new_row);
+    }
+    else {
+      canvass.insertRow();
+    }
     for (var col = 1; col <=width; col++){
       canvass.rows[row - 1].insertCell();
     }
@@ -39,9 +59,10 @@ function makeGrid() {
 }
 
 
-var picker = document.getElementById('sizePicker')
-picker.addEventListener('submit', makeGrid);
-
+//var picker = document.getElementById('sizePicker')
+//picker.addEventListener('submit', hearThat);
+document.addEventListener('submit', makeGrid);
+document.getElementById('pixelCanvas').addEventListener('click',setColor);
 
 /*paint = function(event){
   var pixel = document.getElements
