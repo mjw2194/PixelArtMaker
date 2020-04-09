@@ -1,24 +1,23 @@
+/*
+Contents
+   *1: trival function for testing
+   *2: function for setting color of target table elements
+   *3: function for making grid aka canvas
+   *4: add event listeners to make grid and set colors
+*/
 
-
-
-
-//trivial event for testing purposes
+//1: Trivial event for testing purposes
 hearThat = function(event) {
   console.log(event.target + "CLICK CLACK!!!");
 }
 
 
-
-
-// Select color input
-captureColor = function(event){
-  var color = document.getElementById('colorPicker');
-  console.log(color.value);
-}
-
+//2: set color of target table elements
 setColor = function(event){
+  //capture color for color picker
   var color = document.getElementById('colorPicker').value;
 
+  //change class of target element once clicked which allows multi colors
   if (event.target.className === 'filled'){
     event.target.className = 'empty';
     event.target.style.backgroundColor = "#ffffff";
@@ -30,29 +29,25 @@ setColor = function(event){
 }
 
 
-captureDimensions = function (){
-  var height = document.getElementById('inputHeight').value;
-  var width = document.getElementById('inputWidth').value;
-  return dimensions = [parseInt(height, 10), parseInt(width, 10)];
-  //console.log(dimensions);
-}
 
-
-// When size is submitted by the user, call makeGrid()
-// Select size input
+//3: make grid aka canvas
 function makeGrid(event) {
-
-  //var height = captureDimensions()[0];
-  //var width = captureDimensions()[1];
+  //prevent default to allow form submission and creation
   event.preventDefault();
+  //capture relevant data and elements
   var height = document.getElementById('inputHeight').value;
   var width = document.getElementById('inputWidth').value;
   var canvass = document.getElementById('pixelCanvas');
   var new_row = document.createElement('tr');
 
+  //resets canvas if table already exists
   canvass.innerHTML = null;
 
+  //creates table with user defined rows and coloumns
+  //HTML file edited to allow 25X25
   for (var row = 1; row <=width; row++){
+    //for the first row, need to use append appendChild
+    //afterwards insertrow will work fine
     if(row == 1){
       canvass.appendChild(new_row);
     }
@@ -66,8 +61,6 @@ function makeGrid(event) {
 }
 
 
-//var picker = document.getElementById('sizePicker')
-//picker.addEventListener('submit', hearThat);
-//add event listeners
+//4: add event listeners
 document.addEventListener('submit', makeGrid);
 document.getElementById('pixelCanvas').addEventListener('click',setColor);
